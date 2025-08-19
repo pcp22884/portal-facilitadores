@@ -4,122 +4,73 @@
   <meta charset="UTF-8">
   <title>Portal Facilitadores</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; background: #f0f0f0; }
-    .login { margin-top: 100px; padding: 20px; background: #fff; display: inline-block; border-radius: 10px; }
-    input { display: block; margin: 10px auto; padding: 10px; width: 200px; }
-    button { padding: 10px 20px; }
+    body { font-family: Arial, sans-serif; margin:0; background:#000; color:#fff; text-align:center;}
+    #login { margin-top:50px; background:#fff; color:#000; display:inline-block; padding:20px; border-radius:10px; }
+    input { display:block; margin:10px auto; padding:10px; width:200px; }
+    button { padding:10px 20px; cursor:pointer; }
+    .portal { display:none; margin-top:20px; }
+    iframe { width:100%; height:500px; border:none; }
+    a { color:#fff; display:block; margin:10px 0; }
   </style>
 </head>
 <body>
-  <div class="login">
-    <h2>Login Facilitador</h2>
-    <input type="text" id="usuario" placeholder="Facilitador">
-    <input type="password" id="senha" placeholder="Senha">
-    <button onclick="login()">Entrar</button>
-    <p id="erro" style="color:red;"></p>
-  </div>
 
-  <script>
-    function login() {
-      const user = document.getElementById("usuario").value.toUpperCase();
-      const pass = document.getElementById("senha").value;
+<!-- Login -->
+<div id="login">
+  <h2>Login Facilitador</h2>
+  <input type="text" id="usuario" placeholder="Facilitador">
+  <input type="password" id="senha" placeholder="Senha">
+  <button onclick="login()">Entrar</button>
+  <p id="erro" style="color:red;"></p>
+</div>
 
-      if (user === "JONAS" && pass === "1593") {
-        window.location.href = "jonas.html";
-      } else if (user === "EDIMO" && pass === "3574") {
-        window.location.href = "edimo.html";
-      } else if (user === "LUCAS" && pass === "8526") {
-        window.location.href = "lucas.html";
-      } else if (user === "VALDIR" && pass === "7569") {
-        window.location.href = "valdir.html";
-      } else {
-        document.getElementById("erro").innerText = "Usuário ou senha incorretos!";
-      }
-    }
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Portal Jonas</title>
-  <style>
-    body { margin: 0; background: #000; color: #fff; }
-    iframe { width: 100%; height: 90vh; border: none; }
-    .topo { background: #222; padding: 10px; text-align: center; }
-    a { color: #fff; text-decoration: none; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="topo">
-    <h2>Bem-vindo Jonas</h2>
-    <a href="index.html">← Voltar ao Login</a>
-  </div>
-
+<!-- Portais -->
+<div id="jonas" class="portal">
+  <h2>Bem-vindo Jonas</h2>
+  <a href="#" onclick="voltar()">← Voltar ao Login</a>
   <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=185102293&single=true"></iframe>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Portal Edimo</title>
-  <style>
-    body { margin: 0; background: #000; color: #fff; }
-    iframe { width: 100%; height: 90vh; border: none; }
-    .topo { background: #222; padding: 10px; text-align: center; }
-    a { color: #fff; text-decoration: none; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="topo">
-    <h2>Bem-vindo Edimo</h2>
-    <a href="index.html">← Voltar ao Login</a>
-  </div>
+</div>
 
+<div id="edimo" class="portal">
+  <h2>Bem-vindo Edimo</h2>
+  <a href="#" onclick="voltar()">← Voltar ao Login</a>
   <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1348253825&single=true"></iframe>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Portal Lucas</title>
-  <style>
-    body { margin: 0; background: #000; color: #fff; }
-    iframe { width: 100%; height: 90vh; border: none; }
-    .topo { background: #222; padding: 10px; text-align: center; }
-    a { color: #fff; text-decoration: none; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="topo">
-    <h2>Bem-vindo Lucas</h2>
-    <a href="index.html">← Voltar ao Login</a>
-  </div>
+</div>
 
+<div id="lucas" class="portal">
+  <h2>Bem-vindo Lucas</h2>
+  <a href="#" onclick="voltar()">← Voltar ao Login</a>
   <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1247918890&single=true"></iframe>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Portal Valdir</title>
-  <style>
-    body { margin: 0; background: #000; color: #fff; }
-    iframe { width: 100%; height: 90vh; border: none; }
-    .topo { background: #222; padding: 10px; text-align: center; }
-    a { color: #fff; text-decoration: none; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <div class="topo">
-    <h2>Bem-vindo Valdir</h2>
-    <a href="index.html">← Voltar ao Login</a>
-  </div>
+</div>
 
+<div id="valdir" class="portal">
+  <h2>Bem-vindo Valdir</h2>
+  <a href="#" onclick="voltar()">← Voltar ao Login</a>
   <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1310702469&single=true"></iframe>
+</div>
+
+<script>
+function login() {
+  const user = document.getElementById("usuario").value.toUpperCase();
+  const pass = document.getElementById("senha").value;
+  const credenciais = {"JONAS":"1593","EDIMO":"3574","LUCAS":"8526","VALDIR":"7569"};
+
+  if(credenciais[user] && credenciais[user]===pass){
+    document.getElementById("login").style.display = "none";
+    document.getElementById(user.toLowerCase()).style.display = "block";
+  } else {
+    document.getElementById("erro").innerText = "Usuário ou senha inválidos!";
+  }
+}
+
+function voltar() {
+  // Esconde todos os portais
+  const portais = document.querySelectorAll(".portal");
+  portais.forEach(p => p.style.display="none");
+  // Mostra login
+  document.getElementById("login").style.display = "block";
+}
+</script>
+
 </body>
 </html>

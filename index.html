@@ -1,76 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Portal Facilitadores</title>
+  <title>Dashboard Facilitadores</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#000; color:#fff; text-align:center;}
-    #login { margin-top:50px; background:#fff; color:#000; display:inline-block; padding:20px; border-radius:10px; }
-    input { display:block; margin:10px auto; padding:10px; width:200px; }
-    button { padding:10px 20px; cursor:pointer; }
-    .portal { display:none; margin-top:20px; }
-    iframe { width:100%; height:90vh; border:none; }
-    a { color:#fff; display:block; margin:10px 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 300px;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
+  <div class="login-box">
+    <h2>Login Facilitador</h2>
+    <input type="text" id="usuario" placeholder="Nome do facilitador">
+    <input type="password" id="senha" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <div id="erro" class="error"></div>
+  </div>
 
-<!-- Login -->
-<div id="login">
-  <h2>Login Facilitador</h2>
-  <input type="text" id="usuario" placeholder="Facilitador">
-  <input type="password" id="senha" placeholder="Senha">
-  <button onclick="login()">Entrar</button>
-  <p id="erro" style="color:red;"></p>
-</div>
+  <script>
+    function login() {
+      const usuario = document.getElementById("usuario").value.toLowerCase();
+      const senha = document.getElementById("senha").value;
+      const erro = document.getElementById("erro");
 
-<!-- Portais -->
-<div id="jonas" class="portal">
-  <h2>Bem-vindo Jonas</h2>
-  <a href="#" onclick="voltar()">← Voltar ao Login</a>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/preview#gid=185102293"></iframe>
-</div>
+      // ID da planilha
+      const sheetId = "11bnZACiAG4R7xdCYRzkyFnlI-7w4zrs1C0w09iBGf2g";
 
-<div id="edimo" class="portal">
-  <h2>Bem-vindo Edimo</h2>
-  <a href="#" onclick="voltar()">← Voltar ao Login</a>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/preview#gid=1348253825"></iframe>
-</div>
+      // Tabela de facilitadores -> senha -> gid da aba
+      const facilitadores = {
+        "jonas": { senha: "1234", gid: "185102293" },
+        "edimo": { senha: "1234", gid: "1348253825" },
+        "lucas": { senha: "1234", gid: "1247918890" },
+        "valdir": { senha: "1234", gid: "1310702469" }
+      };
 
-<div id="lucas" class="portal">
-  <h2>Bem-vindo Lucas</h2>
-  <a href="#" onclick="voltar()">← Voltar ao Login</a>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/preview#gid=1247918890"></iframe>
-</div>
-
-<div id="valdir" class="portal">
-  <h2>Bem-vindo Valdir</h2>
-  <a href="#" onclick="voltar()">← Voltar ao Login</a>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/preview#gid=1310702469"></iframe>
-</div>
-
-<script>
-function login() {
-  const user = document.getElementById("usuario").value.toUpperCase();
-  const pass = document.getElementById("senha").value;
-  const credenciais = {"JONAS":"1593","EDIMO":"3574","LUCAS":"8526","VALDIR":"7569"};
-
-  if(credenciais[user] && credenciais[user]===pass){
-    document.getElementById("login").style.display = "none";
-    document.getElementById(user.toLowerCase()).style.display = "block";
-  } else {
-    document.getElementById("erro").innerText = "Usuário ou senha inválidos!";
-  }
-}
-
-function voltar() {
-  // Esconde todos os portais
-  const portais = document.querySelectorAll(".portal");
-  portais.forEach(p => p.style.display="none");
-  // Mostra login
-  document.getElementById("login").style.display = "block";
-}
-</script>
-
+      if (facilitadores[usuario] && facilitadores[usuario].senha === senha) {
+        const gid = facilitadores[usuario].gid;
+        const url = `https://docs.google.com/spreadsheets/d/${sheetId}/pubhtml?gid=${gid}&single=true`;
+        window.location.href = url;
+      } else {
+        erro.textContent = "Usuário ou senha incorretos!";
+      }
+    }
+  </script>
 </body>
 </html>

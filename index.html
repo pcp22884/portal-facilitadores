@@ -37,6 +37,17 @@
     }
     button:hover { background: #218838; }
     .error { color: red; margin-top: 10px; }
+    .logout-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #dc3545;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+    }
+    .logout-btn:hover { background: #c82333; }
   </style>
 </head>
 <body>
@@ -50,14 +61,21 @@
 </div>
 
 <script>
-  const sheetId = "1D3-AkT4kEpvno-pELEgC4qzcREs4OIAd7GZwRAlZRq4";
-  const abaLogin = "179858589";
-
+  // Links publicados em web para cada facilitador
   const facilitadores = {
-    "jonas": { senha: "1593", gid: "185102293" },
-    "valdir": { senha: "7569", gid: "1310702469" },
-    "lucas": { senha: "8526", gid: "1247918890" },
-    "edimo": { senha: "3574", gid: "1348253825" }
+    "jonas": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=185102293&single=true",
+    "valdir": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1310702469&single=true",
+    "lucas": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1247918890&single=true",
+    "edimo": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1348253825&single=true",
+    "login": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=179858589&single=true"
+  };
+
+  // Senhas dos facilitadores
+  const senhas = {
+    "jonas": "1593",
+    "valdir": "7569",
+    "lucas": "8526",
+    "edimo": "3574"
   };
 
   function login() {
@@ -65,20 +83,20 @@
     const pass = document.getElementById("senha").value;
     const erro = document.getElementById("erro");
 
-    if(facilitadores[user] && facilitadores[user].senha === pass) {
-      const gid = facilitadores[user].gid;
-      const url = `https://docs.google.com/spreadsheets/d/${sheetId}/pubhtml?gid=${gid}&single=true`;
-      window.location.href = url;
+    if(facilitadores[user] && senhas[user] === pass) {
+      window.location.href = facilitadores[user];
     } else {
       erro.textContent = "Usuário ou senha incorretos!";
     }
   }
 
-  // Função de logout, pode ser usada em qualquer página
   function logout() {
-    window.location.href = `https://docs.google.com/spreadsheets/d/${sheetId}/pubhtml?gid=${abaLogin}&single=true`;
+    window.location.href = facilitadores["login"];
   }
 </script>
+
+<!-- Botão de logout fixo -->
+<button class="logout-btn" onclick="logout()">Logout</button>
 
 </body>
 </html>

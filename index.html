@@ -11,31 +11,33 @@
       margin: 0;
       text-align: center;
     }
-    .login-box {
-      background: #222;
-      padding: 30px;
-      border-radius: 10px;
-      margin-top: 50px;
-      display: inline-block;
+    .tela {
+      display: none;
     }
-    input {
-      width: 200px;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
+    .ativa {
+      display: block;
     }
-    button {
-      padding: 10px 20px;
+    .btn {
+      padding: 12px 25px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      background: #28a745;
-      color: #fff;
+      background: orange;
+      color: #000;
       font-weight: bold;
-      margin-top: 10px;
+      margin-top: 20px;
+      font-size: 16px;
     }
-    button:hover { background: #218838; }
+    .btn:hover {
+      background: #e69500;
+    }
+    input {
+      width: 220px;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: none;
+    }
     .error { color: red; margin-top: 10px; }
     .logout-btn {
       position: fixed;
@@ -46,18 +48,36 @@
       border-radius: 5px;
       color: #fff;
       font-weight: bold;
+      cursor: pointer;
+      display: none;
     }
     .logout-btn:hover { background: #c82333; }
+    .logo {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
-<div class="login-box">
+<!-- TELA INICIAL -->
+<div id="telaInicial" class="tela ativa">
+  <h2>Bem-vindo, facilitador! Acesse aqui seus resultados.</h2>
+  <img src="https://i.imgur.com/Xfx4z6Y.png" alt="Facilitador" style="max-width:400px; margin:20px auto; display:block;">
+  <button class="btn" onclick="abrirLogin()">LOGIN</button>
+  <div class="logo">
+    <img src="https://i.imgur.com/9cV6pS9.png" alt="Logo Granaço" style="max-width:200px;">
+  </div>
+</div>
+
+<!-- TELA DE LOGIN -->
+<div id="telaLogin" class="tela">
   <h2>Login Facilitador</h2>
-  <input type="text" id="usuario" placeholder="Facilitador">
-  <input type="password" id="senha" placeholder="Senha">
-  <button onclick="login()">Entrar</button>
+  <input type="text" id="usuario" placeholder="Facilitador"><br>
+  <input type="password" id="senha" placeholder="Senha"><br>
+  <button class="btn" onclick="login()">Entrar</button>
   <div id="erro" class="error"></div>
+  <br>
+  <button class="btn" onclick="voltarInicio()">Voltar</button>
 </div>
 
 <script>
@@ -66,17 +86,26 @@
     "jonas": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=185102293&single=true",
     "valdir": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1310702469&single=true",
     "lucas": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1247918890&single=true",
-    "edimo": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1348253825&single=true",
-    "login": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=179858589&single=true"
+    "edimo": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1nbT_PrYmsVnT2A-h1TLHhnUByJpX8o511T8O0Kdg7ApQufzQkVaCI6B3DJn6yaDucePHX7VYR1eQ/pubhtml?gid=1348253825&single=true"
   };
 
-  // Senhas dos facilitadores
+  // Senhas
   const senhas = {
     "jonas": "1593",
     "valdir": "7569",
     "lucas": "8526",
     "edimo": "3574"
   };
+
+  function abrirLogin() {
+    document.getElementById("telaInicial").classList.remove("ativa");
+    document.getElementById("telaLogin").classList.add("ativa");
+  }
+
+  function voltarInicio() {
+    document.getElementById("telaLogin").classList.remove("ativa");
+    document.getElementById("telaInicial").classList.add("ativa");
+  }
 
   function login() {
     const user = document.getElementById("usuario").value.toLowerCase();
@@ -89,14 +118,10 @@
       erro.textContent = "Usuário ou senha incorretos!";
     }
   }
-
-  function logout() {
-    window.location.href = facilitadores["login"];
-  }
 </script>
 
 <!-- Botão de logout fixo -->
-<button class="logout-btn" onclick="logout()">Logout</button>
+<button id="logoutBtn" class="logout-btn" onclick="voltarInicio()">Voltar ao Login</button>
 
 </body>
 </html>
